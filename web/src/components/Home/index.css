@@ -1,7 +1,12 @@
+body{
+  background-color: #f3f3f3;
+
+}
+
 .main {
   display: flex;
   /* flex-direction: column; */
-  /* justify-content: ; */
+  justify-content: center;
   flex-wrap: wrap;
   /* align-items: center; */
 padding: 10px;
@@ -11,10 +16,13 @@ padding: 10px;
   border-color: rgb(255, 255, 255);
   margin: 5px;
   width: 200px;
+  height: 150px;
   border: 1px solid rgb(245, 245, 245);
   box-shadow: 0px 0px 5px 0px gray;
   padding: 10px;
-  /* align-items: center; */
+  display: flex;
+  /* justify-content: end; */
+  align-items: flex-end;
   /* height: 200px; */
 }
 
@@ -50,45 +58,30 @@ padding: 10px;
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    background-color: black;
+    background-color: #ebecf0;
+    box-shadow:  1px 1px 2px #babecc,  -1px -1px 2px #fff;
     align-items: center;
-    height: 50px;
+    height: 70px;
   }
-
-  /* .navbar button{
-      margin: 1px 5px;
-      background-color: black;
-      border: none;
-      color: white;
-      padding: 5px;
-  }
-  
-  .navbar button:hover{
-      background-color: white;
-      color: #ffbb00;
-      border-radius: 10px;
-  }
-   */
+   
   
   .box{
     border-radius: 10px;
     background-color: #ebecf0;
     border: none;
-    height: 520px;
-    bottom: 100px;
-    left: 200px;
+    outline: none;
+    top: 50px;
+    left: 500px;
     position: absolute;
     display: flex;
     margin: 0 auto;
     justify-content: center;
-    /* align-items: center; */
   }
 
 
 /* ************************************************  form */
 
 form {
-    /* border: 2px solid black; */
     padding: 16px;
     width: 60%;
     height: 70%;
@@ -96,40 +89,10 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
-  }
-  
-  .segment {
-    padding: 12px 0;
+    background-color: #ebecf0;
     text-align: center;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    /* justify-content: center; */
   }
   
-  .content {
-    /* border: #ae1100 1px solid; */
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-  }
-  
-  .left {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   
   button,
   input {
@@ -144,7 +107,7 @@ form {
   label {
     display: block;
     margin-bottom: 24px;
-    width: 80%;
+    width: 100%;
   }
   input {
     margin-right: 8px;
@@ -158,63 +121,60 @@ form {
   input:focus {
     box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
   }
-  button {
-    color: #61677c;
-    font-weight: bold;
-    /* box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc; */
-    transition: all 0.2s ease-in-out;
-    height: 10px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  
+
   .errorSpan {
     color: #ae1100;
     margin: 0;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
   
   button:hover {
+    color: #ae1100;
+    cursor: pointer;
     box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
   }
   button:active {
     box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
   }
-  button .icon {
-    margin-right: 8px;
-  }
-  button.unit {
+  .unit {
     border-radius: 8px;
     line-height: 0;
-    width: 48px;
-    height: 48px;
+    width: 80px;
+    height: 45px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     margin: 0 8px;
     font-size: 19.2px;
   }
-  button.unit .icon {
-    margin-right: 0;
-  }
   
-  .mainBtn {
-    width: 100%;
-    display: flex;
+  .navbar>.unit {
+    border-radius: 8px;
+    line-height: 0;
+    width: 180px;
+    height: 45px;
+    display: inline-flex;
     justify-content: center;
+    align-items: center;
+    margin: 0 8px;
+    font-size: 19.2px;
+  }
+
+  @media screen  and (max-width: 770px) {
+    .box{
+      top: 10px;
+      left: 150px;
+    }
+  
+    
   }
   
-  button.red {
-    display: block;
-    width: 50%;
-    color: #ae1100;
+  @media screen  and (max-width: 430px) {
+    .box{
+      top: 10px;
+      left: 0px;
+    }
+  
+    
   }
-  .input-group {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .input-group label {
-    margin: 0;
-    flex: 1;
-  }
+  

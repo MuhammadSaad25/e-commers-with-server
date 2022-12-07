@@ -120,26 +120,31 @@ export default function Home(props) {
         },
     });
     const handlePicChange = (e) => {
-
         // to display imager instantly on screen
-        const profilePictureInput = document.querySelector("#productPic");
+        const profilePictureInput = document.querySelector("#productImg");
         const url = URL.createObjectURL(profilePictureInput.files[0]);
         console.log("img url: ", url);
         document.querySelector(
             "#previewProductImg"
-        ).innerHTML = `<img width="200px" src="${url}" alt="" id="img"> `;
-        setFieldValue("productImg", e.target.files[0].webkitRelativePath);
-        console.log(e.target.files[0])
+        ).innerHTML = `<img width="200px" src="${url}" alt="" id="img"/> `;
+        setFieldValue("productImg", e.target.files[0]);
+        console.log(e.target.files);
     };
+
+    const deleteProduct =(id)=>{
+        axios.delete(`http://localhost:5001/product/${id}`)
+        .then(res => console.log("deleted!!!",res)).catch(err=>console.log(err))
+    }
+
     return (
         <>
             <div className="navbar">
                 {/* <h1>Hello 1</h1> */}
-                <button variant="contained" onClick={handleOpenClose}>
+                <button className="unit" variant="contained" onClick={handleOpenClose}>
                     Add Product
                 </button>
-                <button variant="contained" onClick={setToggleRefresh}>
-                    refresh
+                <button className="unit" variant="contained" onClick={setToggleRefresh}>
+                    Refresh
                 </button>
                 <Modal
                     open={open}
@@ -162,9 +167,9 @@ export default function Home(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                            {touched.productName && Boolean(errors.productName) ? (
-                                <span className="errorSpan">{errors.productName}</span>
-                            ) : null}
+                                {touched.productName && Boolean(errors.productName) ? (
+                                    <span className="errorSpan">{errors.productName}</span>
+                                ) : null}
                             </label>
 
 
@@ -182,10 +187,10 @@ export default function Home(props) {
                                     onBlur={handleBlur}
                                 />
 
-                            {touched.productDescription &&
-                                Boolean(errors.productDescription) ? (
-                                <span className="errorSpan">{errors.productDescription}</span>
-                            ) : null}
+                                {touched.productDescription &&
+                                    Boolean(errors.productDescription) ? (
+                                    <span className="errorSpan">{errors.productDescription}</span>
+                                ) : null}
                             </label>
 
                             <label htmlFor="productPrice" className="placeholder">
@@ -202,9 +207,9 @@ export default function Home(props) {
                                     onBlur={handleBlur}
                                 />
 
-                            {touched.productPrice && Boolean(errors.productPrice) ? (
-                                <span className="errorSpan">{errors.productPrice}</span>
-                            ) : null}
+                                {touched.productPrice && Boolean(errors.productPrice) ? (
+                                    <span className="errorSpan">{errors.productPrice}</span>
+                                ) : null}
                             </label>
 
                             <label htmlFor="productPic" className="placeholder">
@@ -216,16 +221,11 @@ export default function Home(props) {
                                     autoComplete="on"
                                     id="productPic"
                                     placeholder="Product Picture..."
-                                    // name="productPic"
-                                    // value={values.productImg}
                                     onChange={handlePicChange}
                                 // onBlur={handleBlur}
                                 />
                             </label>
 
-                            {/* {touched.name && Boolean(errors.courseName) ? (
-                <span className="errorSpan">{errors.courseName}</span>
-              ) : null} */}
                             <div id="previewProductImg" alt=""></div>
                             <button type="submit" className="unit">
                                 SUBMIT
@@ -253,28 +253,15 @@ export default function Home(props) {
                             <div className='product-details'>
                                 <p className="producttitle">{eachProduct.name}</p>
                                 <div className='price-container'>
-                                    <span>{eachProduct.price}</span>
+                                    <span>Rs.{eachProduct.price}</span>
                                     <span>{eachProduct.description}</span>
+                                    {/* <span>{eachProduct.id}</span> */}
+                                    {/* <button onClick={()=>deleteProduct(eachProduct.id)}>delete</button> */}
                                 </div>
                             </div>
                         </div>
                     ))}
             </div>
-
-            {/* <Button variant="contained">
-          <Link to="/attendance">Attendance</Link>
-        </Button>
-        <br />
-        <Button variant="contained">
-          <Link to="/courses">Courses</Link>
-        </Button>
-        <br />
-        <Button variant="contained">
-          <Link to="/students">Students</Link>
-        </Button> */}
-            {/* <Link to="/showAllCourses">showAllCourses</Link> */}
-            {/* <Link to="/login">LogIn</Link>
-      <Link to="/signup">SignUp</Link> */}
         </>
     );
 }
