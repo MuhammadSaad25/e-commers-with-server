@@ -132,8 +132,15 @@ export default function Home(props) {
     };
 
     const deleteProduct =(id)=>{
-        axios.delete(`http://localhost:5001/product/${id}`)
-        .then(res => console.log("deleted!!!",res)).catch(err=>console.log(err))
+        // axios.delete(`http://localhost:5001/product/${id}`)
+        // .then(res => console.log("deleted!!!",res)).catch(err=>console.log(err))
+        fetch(`https://e-commerce-sever-saad.cyclic.app/products/${id}`,{
+            method:'delete'
+        }).then((result)=>{
+            result.json().then((resp)=>{
+                console.warn(resp)
+            })
+        })
     }
 
     return (
@@ -256,7 +263,7 @@ export default function Home(props) {
                                     <span>Rs.{eachProduct.price}</span>
                                     <span>{eachProduct.description}</span>
                                     <span>{eachProduct.id}</span>
-                                    {/* <button onClick={()=>deleteProduct(eachProduct.id)}>delete</button> */}
+                                    <button onClick={()=>deleteProduct(eachProduct.id)}>delete</button>
                                 </div>
                             </div>
                         </div>
