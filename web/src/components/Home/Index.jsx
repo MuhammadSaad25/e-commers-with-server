@@ -255,7 +255,7 @@ export default function Home(props) {
                                 <div className='price-container'>
                                     <span>Rs.{eachProduct.price}</span>
                                     <span>{eachProduct.description}</span>
-                                    {/* <span>{eachProduct.id}</span> */}
+                                    <span>{eachProduct.id}</span>
                                     {/* <button onClick={()=>deleteProduct(eachProduct.id)}>delete</button> */}
                                 </div>
                             </div>

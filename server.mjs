@@ -2,6 +2,7 @@
 import express from "express";
 import path from "path";
 import cors from "cors";
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -13,6 +14,9 @@ let products = []; // TODO: connect with mongodb instead
 
 app.post("/product", (req, res) => {
   const body = req.body;
+  const Id = uuidv4();
+  const productId = { ...body, id: Id };
+
   if (!body.name || !body.price || !body.description) {
     res.status(400).send({ message: "required parameters missing" });
     return;
@@ -21,12 +25,13 @@ app.post("/product", (req, res) => {
   console.log(body.price);
   console.log(body.description);
 
-  products.push({
-    id: new Date().getTime(),
-    name: body.name,
-    price: body.price,
-    description: body.description,
-  });
+  products.push(
+    // id: new Date().getTime(),
+    // name: body.name,
+    // price: body.price,
+    // description: body.description,
+    productId
+  );
   res.send({ message: "product added successfully" });
 });
 
@@ -37,6 +42,7 @@ app.get("/products", (req, res) => {
   });
 });
 console.log(products[0]);
+
 app.get("/product/:id", (req, res) => {
   const id = req.params.id;
   let isFound = false;
@@ -58,23 +64,23 @@ app.get("/product/:id", (req, res) => {
   return;
 });
 
-app.delete("/product/:id", (req, res) => {
-  const id = req.params.id;
+// app.delete("/product/:id", (req, res) => {
+//   const id = req.params.id;
 
-  let isFound = false;
-  for (let i = 0; i < products.length; i++) {
-    if (products[i].id === id) {
-      products.splice(i, 1);
-      res.send({ message: "product deleted successfully" });
-      isFound = true;
-      break;
-    }
-  }
-  if (isFound === false) {
-    res.status(404);
-    res.send({ message: "delete fail: product not found" });
-  }
-});
+//   let isFound = false;
+//   for (let i = 0; i < products.length; i++) {
+//     if (products[i].id === id) {
+//       products.splice(i, 1);
+//       res.send({ message: "product deleted successfully" });
+//       isFound = true;
+//       break;
+//     }
+//   }
+//   if (isFound === false) {
+//     res.status(404);
+//     res.send({ message: "delete fail: product not found" });
+//   }
+// });
 
 app.put("/product/:id", (req, res) => {
   const body = req.body;
