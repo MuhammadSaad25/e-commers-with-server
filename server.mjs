@@ -47,7 +47,14 @@ app.get("/products/:id", (req, res) => {
   const id = req.params.id;
 
   const foundProduct = products.find((body) => body.id == id);
-  res.send(foundProduct)
+  res.send(foundProduct);
+});
+app.delete("/products/:id", (req, res) => {
+  const id = req.params.id;
+
+  products = products.filter((body) => body.id != id);
+
+  res.send(`user with id ${id}`)
 });
 
 // app.get("/product/:id", (req, res) => {
