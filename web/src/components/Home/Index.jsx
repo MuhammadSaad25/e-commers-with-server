@@ -5,30 +5,9 @@ import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import "./index.css";
 import axios from "axios";
-// import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-// import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   onAuthStateChanged,
-//   signOut,
-//   getAuth,
-// } from "firebase/auth";
-// import { auth } from "./firebase-config";
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-};
 const baseURI = "https://e-commerce-sever-saad.cyclic.app";
 
 export default function Home(props) {
@@ -48,6 +27,18 @@ export default function Home(props) {
             setProductData(response.data.data);
         })();
     }, [toggleRefresh]);
+
+    const deleteProduct = (id) => {
+        fetch(`https://e-commerce-sever-saad.cyclic.app/products/${id}`, {
+            method: 'delete'
+        }).then((result) => {
+            result.json().then((resp) => {
+                console.warn(resp)
+                toggleRefresh()
+            })
+        })
+    }
+
 
     //formik validation
     const {
@@ -131,17 +122,6 @@ export default function Home(props) {
         console.log(e.target.files);
     };
 
-    const deleteProduct =(id)=>{
-        // axios.delete(`http://localhost:5001/product/${id}`)
-        // .then(res => console.log("deleted!!!",res)).catch(err=>console.log(err))
-        fetch(`https://e-commerce-sever-saad.cyclic.app/products/${id}`,{
-            method:'delete'
-        }).then((result)=>{
-            result.json().then((resp)=>{
-                console.warn(resp)
-            })
-        })
-    }
 
     return (
         <>
@@ -262,8 +242,8 @@ export default function Home(props) {
                                 <div className='price-container'>
                                     <span>Rs.{eachProduct.price}</span>
                                     <span>{eachProduct.description}</span>
-                                    <span>{eachProduct.id}</span>
-                                    <button onClick={()=>deleteProduct(eachProduct.id)}>delete</button>
+                                    {/* <span>{eachProduct.id}</span> */}
+                                    <button className="unit" onClick={() => deleteProduct(eachProduct.id)}>Delete</button>
                                 </div>
                             </div>
                         </div>
