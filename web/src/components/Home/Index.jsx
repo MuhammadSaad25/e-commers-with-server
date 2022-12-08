@@ -20,11 +20,14 @@ export default function Home(props) {
     const [productData, setProductData] = useState([]);
     const [toggleRefresh, setToggleRefresh] = useState(true);
 
+
+
     //geting All Users
     useEffect(() => {
         (async () => {
             const response = await axios.get(`${baseURI}/products`);
             setProductData(response.data.data);
+            // console.log(response.data.data);
         })();
 
     }, [toggleRefresh]);
@@ -34,12 +37,17 @@ export default function Home(props) {
             method: 'delete'
         }).then((result) => {
             result.json().then((resp) => {
-                console.warn(resp)
+                // console.warn(resp)
                 // toggleRefresh()
             })
         })
     }
-
+    const selectProduct = (id) => {
+        console.log(id);
+        // setName(id.name)
+        // setPrice(id.price)
+        // setDescription(id.description)
+    }
 
     //formik validation
     const {
@@ -126,6 +134,9 @@ export default function Home(props) {
 
     return (
         <>
+
+
+
             <div className="navbar">
                 {/* <h1>Hello 1</h1> */}
                 <button className="unit" variant="contained" onClick={handleOpenClose}>
@@ -142,9 +153,9 @@ export default function Home(props) {
                 >
                     <Box className="box" >
                         <form onSubmit={handleSubmit} className="modalForm1">
-                        <button className="unitX" variant="contained" onClick={handleOpenClose}>
-                            X
-                        </button>
+                            <button className="unitX" variant="contained" onClick={handleOpenClose}>
+                                X
+                            </button>
                             <label htmlFor="productName" className="placeholder">
                                 Product Name
                                 <input
@@ -239,7 +250,6 @@ export default function Home(props) {
                 {!productData
                     ? null
                     : productData?.map((eachProduct, index) => (
-
                         <div className="product-container" key={index}>
                             <div className='product-details'>
                                 <p className="producttitle">{eachProduct.name}</p>
@@ -247,7 +257,10 @@ export default function Home(props) {
                                     <span>Rs.{eachProduct.price}</span>
                                     <span>{eachProduct.description}</span>
                                     {/* <span>{eachProduct.id}</span> */}
-                                    <button className="unit" onClick={() => deleteProduct(eachProduct.id)}>Delete</button>
+                                    <div className="pBtn">
+                                        <button className="unit" onClick={() => deleteProduct(eachProduct.id)}>Delete</button>
+                                        <button className="unit" onClick={() => selectProduct(eachProduct.id)}>Update</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
