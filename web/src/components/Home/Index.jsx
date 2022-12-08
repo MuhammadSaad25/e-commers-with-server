@@ -29,7 +29,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-const baseURI = "http://localhost:5001";
+const baseURI = "https://e-commerce-sever-saad.cyclic.app";
 
 export default function Home(props) {
     // Material UI
