@@ -159,6 +159,18 @@ button:active {
   width: 45px;
   font-size: 12px;
 }
+.unitX {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 45px;
+  /* text-align: center; */
+  width: 45px;
+  font-size: 16px;
+  font-weight: bold;
+  /* border-radius: none; */
+
+}
 
 @media screen and (max-width: 770px) {
   .box {

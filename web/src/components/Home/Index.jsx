@@ -26,6 +26,7 @@ export default function Home(props) {
             const response = await axios.get(`${baseURI}/products`);
             setProductData(response.data.data);
         })();
+
     }, [toggleRefresh]);
 
     const deleteProduct = (id) => {
@@ -34,7 +35,7 @@ export default function Home(props) {
         }).then((result) => {
             result.json().then((resp) => {
                 console.warn(resp)
-                toggleRefresh()
+                // toggleRefresh()
             })
         })
     }
@@ -141,6 +142,9 @@ export default function Home(props) {
                 >
                     <Box className="box" >
                         <form onSubmit={handleSubmit} className="modalForm1">
+                        <button className="unitX" variant="contained" onClick={handleOpenClose}>
+                            X
+                        </button>
                             <label htmlFor="productName" className="placeholder">
                                 Product Name
                                 <input
