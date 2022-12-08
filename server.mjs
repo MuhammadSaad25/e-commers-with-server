@@ -43,26 +43,33 @@ app.get("/products", (req, res) => {
 });
 console.log(products[0]);
 
-app.get("/product/:id", (req, res) => {
+app.get("/products/:id", (req, res) => {
   const id = req.params.id;
-  let isFound = false;
-  for (let i = 0; i < products.length; i++) {
-    if (products[i].id === id) {
-      res.send({
-        message: `get product by id: ${products[i].id} success`,
-        data: products[i],
-      });
 
-      isFound = true;
-      break;
-    }
-  }
-  if (isFound === false) {
-    res.status(404);
-    res.send({ message: "product not found" });
-  }
-  return;
+  const foundProduct = products.find((body) => body.id == id);
+  res.send(foundProduct)
 });
+
+// app.get("/product/:id", (req, res) => {
+//   const id = req.params.id;
+//   let isFound = false;
+//   for (let i = 0; i < products.length; i++) {
+//     if (products[i].id === id) {
+//       res.send({
+//         message: `get product by id: ${products[i].id} success`,
+//         data: products[i],
+//       });
+
+//       isFound = true;
+//       break;
+//     }
+//   }
+//   if (isFound === false) {
+//     res.status(404);
+//     res.send({ message: "product not found" });
+//   }
+//   return;
+// });
 
 // app.delete("/product/:id", (req, res) => {
 //   const id = req.params.id;
