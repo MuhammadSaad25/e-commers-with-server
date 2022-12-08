@@ -49,13 +49,62 @@ app.get("/products/:id", (req, res) => {
   const foundProduct = products.find((body) => body.id == id);
   res.send(foundProduct);
 });
+
 app.delete("/products/:id", (req, res) => {
   const id = req.params.id;
 
   products = products.filter((body) => body.id != id);
 
-  res.send(`user with id ${id}`)
+  res.send(`user with id ${id}`);
 });
+
+app.put("/products/:id", (req, res) => {
+  const body = req.body;
+  const id = req.params.id;
+
+  if (!body.name && !body.price && !body.description) {
+    res.status(400).send({ message: "required parameters missing" });
+    return;
+  }
+
+  console.log(body.name);
+  console.log(body.price);
+  console.log(body.description);
+
+  let isFound = false;
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id === id) {
+      products[i].name = body.name;
+      products[i].price = body.price;
+      products[i].description = body.description;
+      res.send({ message: "product modified successfully" });
+      isFound = true;
+      break;
+    }
+  }
+  if (!isFound) {
+    res.status(404);
+    res.send({ message: "edit fail: product not found" });
+  }
+  res.send({ message: "product added successfully" });
+});
+
+
+
+
+
+// app.patch("/products/:id", (req, res) => {
+//   const id = req.params.id;
+//   const body = req.body;
+
+//   const products = products.filter((body) => body.id != id);
+
+//   if (body.name) products.name = body.name;
+//   if (body.price) products.price = body.price;
+//   if (body.description) products.description = body.description;
+
+//   res.send(`user with id ${id} has ben changed`);
+// });
 
 // app.get("/product/:id", (req, res) => {
 //   const id = req.params.id;
@@ -96,36 +145,6 @@ app.delete("/products/:id", (req, res) => {
 //   }
 // });
 
-app.put("/product/:id", (req, res) => {
-  const body = req.body;
-  const id = req.params.id;
-
-  if (!body.name && !body.price && !body.description) {
-    res.status(400).send({ message: "required parameters missing" });
-    return;
-  }
-
-  console.log(body.name);
-  console.log(body.price);
-  console.log(body.description);
-
-  let isFound = false;
-  for (let i = 0; i < products.length; i++) {
-    if (products[i].id === id) {
-      products[i].name = body.name;
-      products[i].price = body.price;
-      products[i].description = body.description;
-      res.send({ message: "product modified successfully" });
-      isFound = true;
-      break;
-    }
-  }
-  if (!isFound) {
-    res.status(404);
-    res.send({ message: "edit fail: product not found" });
-  }
-  res.send({ message: "product added successfully" });
-});
 
 const __dirname = path.resolve();
 app.use("/", express.static(path.join(__dirname, "./web/build")));
