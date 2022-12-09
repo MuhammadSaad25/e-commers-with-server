@@ -38,7 +38,7 @@ export default function Home(props) {
         }).then((result) => {
             result.json().then((resp) => {
                 // console.warn(resp)
-                // toggleRefresh()
+                toggleRefresh(false)
             })
         })
     }
