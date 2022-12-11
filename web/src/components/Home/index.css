@@ -65,12 +65,6 @@ body {
   background-color: #ebecf0;
   border: none;
   outline: none;
-  top: 50px;
-  left: 500px;
-  position: absolute;
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
 }
 
 /* ************************************************  form */
@@ -170,18 +164,4 @@ button:active {
   font-weight: bold;
   /* border-radius: none; */
 
-}
-
-@media screen and (max-width: 770px) {
-  .box {
-    top: 10px;
-    left: 150px;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .box {
-    top: 10px;
-    left: 0px;
-  }
 }

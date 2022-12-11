@@ -1,9 +1,9 @@
 // import "./App.css";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useState} from "react";
 
 // import Login from "./components/Login";
-import Home from "./components/Home/Index";
+import Home from "./components/Home/index";
 // import Courses from "./components/courses/index";
 // import { auth } from "./firebase";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";

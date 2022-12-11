@@ -62,7 +62,7 @@ app.put("/products/:id", (req, res) => {
   const body = req.body;
   const id = req.params.id;
 
-  if (!body.name && !body.price && !body.description) {
+  if (!body.name || !body.price || !body.description) {
     res.status(400).send({ message: "required parameters missing" });
     return;
   }
